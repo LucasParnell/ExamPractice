@@ -62,15 +62,12 @@ class User {
             (NULL, '$this->fullName', $this->dateOfBirth, '$this->email', '$this->passwordHash', $currentDate)
             SQL;
 
+            //Check if user exists
+            if($this->checkUserType($db)!="none"){
+                return "userExists";
+            }
             
-            try{
-                $db->query($sql);
-            }
-            catch(mysqli_sql_exception $e){
-                if($e->getCode()===1062){
-                    return "userExists";
-                }
-            }
+            $db->query($sql);
 
             //Clear hash as this is serialised.
             $this->passwordHash = "";

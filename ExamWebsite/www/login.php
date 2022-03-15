@@ -18,9 +18,6 @@
 
         $status = $login->process();
 
-
-        print_r($status);
-
         if(!in_array("signedUp", $status) && !in_array("loggedIn", $status)){
             session_abort();
         }else{

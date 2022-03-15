@@ -80,7 +80,7 @@
             }
 
             //Password length
-            if(strlen($this->postData["password"])<6 || strlen($this->postData["password"])>32){
+            if(strlen($this->postData["password"]) < 6 || strlen($this->postData["password"]) > 32){
                 array_push($status, "invalidPassword");
             }
 
@@ -96,8 +96,8 @@
             $user->setFullName($validName);
             $user->setDateOfBirth($dateOfBirth->format("Y-m-d"));
             $user->setEmail($this->email);
+
             //Password is taken from postData to minimise storage of the unhashed value.
-            
             $user->hashAndSetPassword($this->postData["password"]);
             $user->setTeacher($isTeacher);
 
