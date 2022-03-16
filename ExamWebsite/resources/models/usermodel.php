@@ -8,6 +8,7 @@ class User {
         $this->email = "";
         $this->passwordHash = "";
         $this->isTeacher = false;
+        $this->userId = 0;
     }
 
     function setFullName($fullName){
@@ -63,11 +64,13 @@ class User {
             SQL;
 
             //Check if user exists
-            if($this->checkUserType($db)!="none"){
+            if($this->getUserType($db)!="none"){
                 return "userExists";
             }
             
             $db->query($sql);
+
+            $userId = $this->getUserId($db, $this->email);
 
             //Clear hash as this is serialised.
             $this->passwordHash = "";
@@ -97,7 +100,7 @@ class User {
                 SQL;
 
 
-                $userType = $this->checkUserType($db);
+                $userType = $this->getUserType($db);
 
                 if($userType!="none"){
                     return "userExists";
@@ -120,7 +123,7 @@ class User {
         $this->email = $db->real_escape_string($this->email);
 
         //Figure out if the user is a student or teacher
-        $userType = $this->checkUserType($db);
+        $userType = $this->getUserType($db);
 
         if($userType=="none"){
             return "noUser";
@@ -160,13 +163,13 @@ class User {
 
             //Compare passwords
             $passMatch = password_verify($password, $dbHash);
-
             if($passMatch){
                 //Set user details from row
-                $user->setFullName($row["TeacherName"]);
-                $user->setDateOfBirth($row["TeacherDateOfBirth"]);
-                $user->setTeacher(false);
-                return "success";
+                $this->setFullName($row["TeacherName"]);
+                $this->setDateOfBirth($row["TeacherDateOfBirth"]);
+                $this->setTeacher(true);
+                $this->userId = $this->getUserId($db, $this->email);
+                return "loggedIn";
 
             }else{
                 return "passIncorrect";
@@ -177,7 +180,7 @@ class User {
 
 
 
-    function checkUserType($db){
+    function getUserType($db){
         //Check if the user is a student or teacher
         //or if the user doesnt exist at all
 
@@ -208,6 +211,32 @@ class User {
         }
         
         return $userType;
+
+    }
+
+    function getUserId($db, $email){
+
+
+        $userId = 0;
+        $sql = "";
+        $userType = $this->getUserType($db);
+
+        if($userType == "teacher"){
+            $sql = <<<SQL
+            SELECT ID FROM teachers WHERE TeacherEmail = "$this->email"
+            SQL;
+        }else if ($userType == "student"){
+        $sql = <<<SQL
+            SELECT ID FROM students WHERE StudentEmail = "$this->email"
+            SQL;
+        }
+        else{
+            return -1;
+        }
+
+        $result = $db->query($sql);
+        $userId = $result->fetch_assoc()["ID"];
+        return $userId;
 
     }
 

@@ -4,7 +4,7 @@
 <?php $this->startSection("profileInfo"); ?>
 
 <!--Profile Picture-->
-<div class="d-inline-flex align-items-center bg-body shadow-lg p-2 bg-body rounded justify-content-end">
+<div class="d-inline-flex align-items-center bg-body shadow-lg p-1 bg-body rounded justify-content-end">
 
  <div class="dropdown">
  <a class="lead mx-3 text-center nav-link dropdown-toggle text-secondary" id="navbarDropdown" data-bs-toggle="dropdown" style="cursor: pointer; user-select: none; text-decoration: none;"><?php echo \htmlentities($fullName, ENT_QUOTES, 'UTF-8', false); ?></a>
@@ -18,8 +18,8 @@
  </div>
  </div>
  </div>
- <div class="border rounded bg-secondary">
- <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-person-fill py-2 text-muted shadow-lg bg-body" style="cursor: pointer; user-select: none; text-decoration: none;" viewBox="0 0 16 16">
+ <div class="border rounded shadow shadow-lg">
+ <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-person-fill py-2 text-muted border border-light bg-body" style="cursor: pointer; user-select: none; text-decoration: none;" viewBox="0 0 16 16">
  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
  </svg>
  </div>
@@ -84,6 +84,21 @@
  animation-duration: 0.4s;
  animation-fill-mode: both;
  }
+
+ @keyframes itemHover {
+ 0% {
+ box-shadow: 0px 0px 14px 2px rgba(0,0,0,0);
+ }
+ 50% {
+ box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.15);
+ }
+ }
+
+ .item-box:hover {
+ animation: itemHover 0.4s;
+ box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.15);
+ }
+
  </style>
  </head>
  <body class="text-light">
@@ -94,12 +109,12 @@
  <span class="navbar-toggler-icon"></span>
  </button>
  <div class="collapse navbar-collapse" id="navbarSupportedContent">
- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+ <ul class="navbar-nav me-auto ms-4 mb-2 mb-lg-0">
  <li class="nav-item">
- <a class="nav-link lead <?php if($page=="home"): ?> active <?php endif; ?>" data-redir-loc="/">Dashboard</a>
+ <a class="nav-link px-3 lead <?php if($page=="dashboard"): ?> active <?php endif; ?>" data-redir-loc="/">Dashboard</a>
  </li>
  <li class="nav-item">
- <a class="nav-link lead <?php if($page=="about"): ?> active <?php endif; ?>"  data-redir-loc="tasks.php">Tasks</a>
+ <a class="nav-link px-3 lead <?php if($page=="tasks"): ?> active <?php endif; ?>"  data-redir-loc="tasks.php">Tasks</a>
  </li>
  </ul>
  <div class="d-inline-flex flex-column">
@@ -120,7 +135,7 @@
 
 
  <div class="allContent text-light h-75">
- <div class="content text-center mt-3 h-100">
+ <div class="content mt-3 h-100">
  <?php echo $this->yieldContent('content'); ?>
  </div>
 
