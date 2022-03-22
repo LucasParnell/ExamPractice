@@ -1,0 +1,21 @@
+{
+	"title": "Adding Two Numbers",
+	"description": "Try and add as many numbers as you can.",
+	"questions": {
+		"1": {
+			"type": "text",
+			"question": "15+3?",
+			"answer": "18"
+		},
+		"2": {
+			"type": "text",
+			"question": "59+25?",
+			"answer": "84"
+		},
+		"3": {
+			"type": "text",
+			"question": "43+67?",
+			"answer": "110"
+		}
+	}
+}

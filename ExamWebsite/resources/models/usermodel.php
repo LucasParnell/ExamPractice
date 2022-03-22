@@ -53,7 +53,7 @@ class User {
 
             //Current date
             $currentDate = new DateTime();
-            $currentDate = $currentDate->format("d-m-Y");
+            $currentDate = $currentDate->format("Y-m-d");
             
             //SQL to try and insert the user data
             $sql = <<<SQL
@@ -70,7 +70,7 @@ class User {
             
             $db->query($sql);
 
-            $userId = $this->getUserId($db, $this->email);
+            $userId = $this->getUserId();
 
             //Clear hash as this is serialised.
             $this->passwordHash = "";
@@ -168,7 +168,7 @@ class User {
                 $this->setFullName($row["TeacherName"]);
                 $this->setDateOfBirth($row["TeacherDateOfBirth"]);
                 $this->setTeacher(true);
-                $this->userId = $this->getUserId($db, $this->email);
+                $this->userId = $this->getUserId();
                 return "loggedIn";
 
             }else{
@@ -214,8 +214,10 @@ class User {
 
     }
 
-    function getUserId($db, $email){
+    function getUserId(){
 
+        $db = $this->connectDatabase();
+        $email = $this->email;
 
         $userId = 0;
         $sql = "";

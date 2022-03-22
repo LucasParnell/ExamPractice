@@ -1,23 +1,86 @@
 <?php
-    class Task {
+    class Tasks {
 
-        function getTasks($user){
-            //PLACEHOLDER
-            //JUST RETURNS HARDCODED TASKS
+        function getStudentTasks($user){
+            $sql = "";
+
+            $userId = $user->getUserId();
+            //First, get TeachingGroups of the user
+
+            $sql = <<<SQL
+            SELECT `TeachingGroupID` FROM `TeachingGroupStudents` WHERE `StudentID` = $userId;
+            SQL;
+
+            $db = $this->connectDatabase();
+
+            $result = $db->query($sql);
+
+
+            $resultArray = $result->fetch_all();
+
+            //Final array for tasks
             $tasks = [];
 
-            //dueBy will be changed to UK standard before storage.
-            array_push($tasks,  array("name"=>"Maths", "description"=>"Multiplication and division", "setBy"=>"Mr Glew", "points"=>24, "dueBy"=>"16/03/2022"));
-            array_push($tasks,  array("name"=>"English", "description"=>"Metaphors and similes", "setBy"=>"Mr Wills", "points"=>35, "dueBy"=>"20/04/2022"));
-            array_push($tasks,  array("name"=>"French", "description"=>"Basic words", "setBy"=>"Mrs Timms", "points"=>14, "dueBy"=>"19/03/2022"));
-            array_push($tasks,  array("name"=>"Geography", "description"=>"Map reading", "setBy"=>"Mr Carthew", "points"=>22, "dueBy"=>"30/06/2022"));
+            for($i=0; $i<count($resultArray); $i++){
+                $teachingGroup = $resultArray[$i][0];
+
+                //Get all SetTasks for TeachingGroup
+                $sql = <<<SQL
+                SELECT * FROM `SetTasks` WHERE `TeachingGroupID` = $teachingGroup;
+                SQL;
+                
+                $result = $db->query($sql);
+
+                
+
+                while ($row = $result->fetch_assoc()) {
+                    //Start storing data
+                    $taskDueDate = new DateTime($row["DueDate"]);
+                    $taskDueDate = $taskDueDate->format("d/m/Y");
+                    $taskTeacherId = $row["TeacherID"];
+                    $taskId = $row["TaskID"];
+                    
+                    //PLACEHOLDER
+                    //Can be improved in the future
+                    $teacherName = $db->query("SELECT `TeacherName` FROM `Teachers` WHERE `ID` = $taskTeacherId")->fetch_all()[0][0];
+
+                    //Get Task Data
+                    $sql = <<<SQL
+                    SELECT * FROM `Tasks` WHERE `ID` = $taskId;
+                    SQL;
+                    $result = $db->query($sql);
+                    $task = $result->fetch_assoc();
+                    //Finally, Populate tasks array
+                    array_push($tasks,  array("id"=>$taskId, "name"=>$task["TaskSubject"], "description"=>$task["TaskDescription"], "setBy"=>$teacherName, "points"=>$task["TaskPoints"], "dueBy"=>$taskDueDate, "fileIdentifier"=>$task["TaskFileIdentifier"]));
+                
+
+                }   
+
+
+            }
+
 
             //Sort tasks by points
             $points = array_column($tasks, 'points');
             array_multisort($points, SORT_DESC, $tasks);
 
+            
+
             return $tasks;
         }
+
+        
+    //---------------------------------
+
+
+
+    function connectDatabase(){
+        $db = new mysqli("localhost", "GibJohn", "Z4yrJvyG)qaqsFFH", "gibjohn");
+        if($db->connect_errno){
+            echo "Database Failed";
+        }
+        return $db;
+    }
 
     }
 ?>
