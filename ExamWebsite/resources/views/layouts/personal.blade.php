@@ -7,13 +7,13 @@
 <div class="d-inline-flex align-items-center bg-body shadow-lg p-1 bg-body rounded justify-content-end">
 
         <div class="dropdown">
-            <a class="lead mx-3 text-center nav-link dropdown-toggle text-secondary" id="navbarDropdown" data-bs-toggle="dropdown" style="cursor: pointer; user-select: none; text-decoration: none;">{{$fullName}}</a>
+            <a class="lead mx-3 text-center nav-link dropdown-toggle text-secondary" id="navbarDropdown" data-bs-toggle="dropdown" style="cursor: pointer; user-select: none; text-decoration: none;">{{$user->fullName}}</a>
             <div class="dropdown-menu slideIn">
                 <div class="d-flex flex-column align-items-center">
-                    <span class="lead">Student</span>
+                    <span class="lead">@if($user->isTeacher)Teacher @else Student @endif</span>
                     <span>Level <span class="text-primary">5</span></span>
                     <span><span class="text-primary">3</span> Tasks due</span>
-                    
+                    <button class="btn btn-secondary btn-sm my-1" data-redir-loc="logout.php">Logout</button>
                     <span>
                 </div>
             </div>
