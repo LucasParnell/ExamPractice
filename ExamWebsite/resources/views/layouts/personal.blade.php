@@ -11,9 +11,12 @@
             <div class="dropdown-menu slideIn">
                 <div class="d-flex flex-column align-items-center">
                     <span class="lead">@if($user->isTeacher)Teacher @else Student @endif</span>
-                    <span>Level <span class="text-primary">5</span></span>
-                    <span><span class="text-primary">3</span> Tasks due</span>
-                    <button class="btn btn-secondary btn-sm my-1" data-redir-loc="logout.php">Logout</button>
+                    @if(!$user->isTeacher)
+                        <span class="text-primary">{{$leaderboard->getPoints()}} <span class="text-dark">points</span></span>
+                        <span><span class="text-primary">{{count($tasks)}}</span> Tasks due</span>
+                    @endif
+                        <button class="btn btn-secondary btn-sm my-1" data-redir-loc="logout.php">Logout</button>
+
                     <span>
                 </div>
             </div>

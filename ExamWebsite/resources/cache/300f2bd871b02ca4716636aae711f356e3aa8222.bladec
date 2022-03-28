@@ -1,21 +1,45 @@
 <div class="modal fade text-dark" id="taskModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
- <div class="modal-dialog modal-xl">
+ <div class="modal-dialog modal-dialog-scrollable">
  <div class="modal-content">
  <div class="modal-header">
- <h5 class="modal-title" id="exampleModalLabel">Task</h5>
+ <h5 class="modal-title" id="exampleModalLabel"><span class="fw-bold"><?php echo \htmlentities($task["name"], ENT_QUOTES, 'UTF-8', false); ?></span> - <?php echo \htmlentities($task["description"], ENT_QUOTES, 'UTF-8', false); ?></h5>
  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
  </div>
- <div class="modal-body">
- Questions
+
+ <div class="modal-body d-flex flex-column">
+ <form>
+ <div class="form-group">
+ <h1>Material</h1>
+ <?php $__currentLoopData = $entries; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $entry): $loop = $this->incrementLoopIndices();  ?>
+ <?php if($entry["type"]=="text"): ?>
+ <p class="lead mb-4"><?php echo \htmlentities($entry["entry"], ENT_QUOTES, 'UTF-8', false); ?></p>
+ <?php elseif($entry["type"]=="image"): ?>
+ <img src="<?php echo \htmlentities($entry["location"], ENT_QUOTES, 'UTF-8', false); ?>" class="mw-100 rounded mb-4"/>
+ <?php endif; ?>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ <hr>
+ <h1>Questions</h1>
  <?php $__currentLoopData = $questions; $this->addLoop($__currentLoopData);$this->getFirstLoop();
  foreach($__currentLoopData as $question): $loop = $this->incrementLoopIndices();  ?>
+ <span>Question <span class="text-primary"><?php echo \htmlentities($loop->index+1, ENT_QUOTES, 'UTF-8', false); ?></span></span> 
+ <?php if($question["type"]=="textinput"): ?>
+ <input name="q_<?php echo \htmlentities($loop->index, ENT_QUOTES, 'UTF-8', false); ?>" type="text" class="form-control my-2 w-100" placeholder="<?php echo \htmlentities($question["question"], ENT_QUOTES, 'UTF-8', false); ?>"  maxlength="<?php echo \htmlentities($question["maxlength"], ENT_QUOTES, 'UTF-8', false); ?>" value="18" required/>
+ <?php elseif($question["type"]=="openinput"): ?>
+ <textarea name="q_<?php echo \htmlentities($loop->index, ENT_QUOTES, 'UTF-8', false); ?>" class="form-control" placeholder="<?php echo \htmlentities($question["question"], ENT_QUOTES, 'UTF-8', false); ?>" rows="5" maxlength="<?php echo \htmlentities($question["maxlength"], ENT_QUOTES, 'UTF-8', false); ?>" required>s</textarea>
+ <?php elseif($question["type"]=="text"): ?>
  <p><?php echo \htmlentities($question["question"], ENT_QUOTES, 'UTF-8', false); ?></p>
+ <?php endif; ?>
  <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ <hr>
+ </div>
+ </form>
  </div>
  <div class="modal-footer">
  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
- <button type="button" class="btn btn-primary">Save changes</button>
+ <button type="button" class="btn btn-primary" id="taskFinishButton">Finish</button>
  </div>
+ </form>
  </div>
  </div>
  </div>

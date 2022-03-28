@@ -1,21 +1,42 @@
 {
 	"title": "Adding Two Numbers",
 	"description": "Try and add as many numbers as you can.",
-	"questions": {
+	"entries": {
 		"1": {
 			"type": "text",
-			"question": "15+3?",
-			"answer": "18"
+			"entry": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis velit sit amet ex fringilla, volutpat porta ipsum porttitor. Nunc vel eros id lectus fringilla tristique. Duis pretium eget orci nec ultricies. Phasellus efficitur tellus tincidunt, cursus nisl at, scelerisque velit. Donec pretium ligula a metus cursus fermentum. Curabitur ultricies orci pulvinar faucibus iaculis. Donec non pellentesque purus. Nulla facilisi. Vivamus gravida nibh nec imperdiet congue. Praesent dapibus finibus nulla, id pulvinar felis posuere et. Aenean eget consequat sem. Ut id nulla placerat, eleifend magna id, euismod est."
 		},
 		"2": {
-			"type": "text",
+			"type": "image",
+			"location": "/rscimg/maths0001_1.webp"
+		}
+	},
+	"questions": {
+		"1": {
+			"type": "textinput",
+			"question": "15+3?",
+			"maxlength": "10",
+			"answer": "18",
+			"marks": "2"
+		},
+		"2": {
+			"type": "textinput",
 			"question": "59+25?",
-			"answer": "84"
+			"maxlength": "10",
+			"answer": "84",
+			"marks": "2"
 		},
 		"3": {
-			"type": "text",
+			"type": "textinput",
 			"question": "43+67?",
-			"answer": "110"
+			"maxlength": "10",
+			"answer": "110",
+			"marks": "2"
+		},
+		"4": {
+			"type": "openinput",
+			"maxlength": "300",
+			"question": "Describe and explain the process of vector multiplication"
 		}
 	}
 }

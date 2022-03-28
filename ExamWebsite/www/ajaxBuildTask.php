@@ -1,13 +1,13 @@
 <?php
     session_start();
     include_once "../libraries/boilerplate.php";
-    include_once "../resources/models/usermodel.php";
-    include_once "../resources/models/taskmodel.php";
-    include_once "../resources/controllers/taskBuilder.php";
+    include_once "../resources/models/user.php";
+    include_once "../resources/models/tasks.php";
+    include_once "../resources/controllers/taskReader.php";
 
     $user = unserialize($_SESSION["User"]); 
-    $tasks = new Tasks();
-    $tasks = $tasks->getStudentTasks($user);
+    $i_tasks = new Tasks();
+    $tasks = $i_tasks->getStudentTasks($user, false);
 
     $taskId = $_POST["taskId"];
 
@@ -21,12 +21,15 @@
         }
     }
 
-    $taskBuilder = new TaskBuilder($task);
+    $_SESSION["openTask"] = $task;
+    $taskReader = new TaskReader($task);
 
-    $taskBuilder->readTaskFile();
+    $taskReader->readTaskFile();
 
-    $questions = $taskBuilder->getQuestions();
+    $entries = $taskReader->getEntries();
+    $questions = $taskReader->getQuestions();
 
-    echo $blade->run("ajax.taskmodal", array("user" => $user, "task"=>$task, "questions"=>$questions));
+
+    echo $blade->run("ajax.taskmodal", array("user" => $user, "task"=>$task, "entries"=>$entries, "questions"=>$questions));
 
 ?>

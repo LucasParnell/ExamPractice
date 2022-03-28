@@ -1,7 +1,7 @@
 <?php
     session_start();
     include_once "../libraries/boilerplate.php";
-    include_once "../resources/models/usermodel.php";
+    include_once "../resources/models/user.php";
 
     $user = unserialize($_SESSION["User"]);
 

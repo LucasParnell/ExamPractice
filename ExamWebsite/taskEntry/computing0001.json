@@ -1,3 +1,46 @@
 {
-	"test": "This is a JSON entry for the computing0001 task!"
+	"title": "Computational Thinking",
+	"description": "Understanding the concept of abstraction",
+	"entries": {
+		"1": {
+			"type": "text",
+			"entry": "Etiam venenatis velit sit amet ex fringilla, volutpat porta ipsum porttitor. Nunc vel eros id lectus fringilla tristique."
+		},
+		"2": {
+			"type": "text",
+			"entry": "Aenean eget consequat sem. Ut id nulla placerat, eleifend magna id, euismod est."
+		},
+		"3": {
+			"type": "image",
+			"location": "/rscimg/computing0001_1.png"
+		}
+	},
+	"questions": {
+		"1": {
+			"type": "textinput",
+			"question": "10+8?",
+			"maxlength": "10",
+			"answer": "18",
+			"marks": "2"
+		},
+		"2": {
+			"type": "textinput",
+			"question": "59+25?",
+			"maxlength": "10",
+			"answer": "84",
+			"marks": "2"
+		},
+		"3": {
+			"type": "textinput",
+			"question": "43+67?",
+			"maxlength": "10",
+			"answer": "110",
+			"marks": "2"
+		},
+		"4": {
+			"type": "openinput",
+			"maxlength": "300",
+			"question": "Describe and explain the process of vector multiplication"
+		}
+	}
 }

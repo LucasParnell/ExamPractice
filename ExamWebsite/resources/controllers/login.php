@@ -1,6 +1,6 @@
 <?php
 
-    include_once "../resources/models/usermodel.php";
+    include_once "../resources/models/user.php";
 
     class Login {
 
