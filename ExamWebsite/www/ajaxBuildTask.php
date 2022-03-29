@@ -7,7 +7,7 @@
 
     $user = unserialize($_SESSION["User"]); 
     $i_tasks = new Tasks();
-    $tasks = $i_tasks->getStudentTasks($user, false);
+    $tasks = $i_tasks->getStudentTasks($user);
 
     $taskId = $_POST["taskId"];
 
@@ -22,6 +22,8 @@
     }
 
     $_SESSION["openTask"] = $task;
+    $_SESSION["openSetTask"] = $i_tasks->getSetTaskId($task);
+
     $taskReader = new TaskReader($task);
 
     $taskReader->readTaskFile();
