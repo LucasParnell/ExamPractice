@@ -1,0 +1,123 @@
+<?php $this->startSection('task'); ?>
+
+<?php $__currentLoopData = $tasks; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $task): $loop = $this->incrementLoopIndices();  ?>
+
+<div class="px-3 py-2 m-2 rounded border item-box" data-task-id="<?php echo \htmlentities($task["id"], ENT_QUOTES, 'UTF-8', false); ?>">
+ <span><span class="fs-4 item-box-name"><?php echo \htmlentities($task["name"], ENT_QUOTES, 'UTF-8', false); ?></span> - <a class="fw-bold fs-6" style="text-decoration: none; cursor: pointer;"> <?php echo \htmlentities($task["setBy"], ENT_QUOTES, 'UTF-8', false); ?> </a></span>
+ 
+ <span style="float: right;">
+ <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-alarm mb-1" viewBox="0 0 16 16">
+ <path d="M8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5z"/>
+ <path d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1h-3zm1.038 3.018a6.093 6.093 0 0 1 .924 0 6 6 0 1 1-.924 0zM0 3.5c0 .753.333 1.429.86 1.887A8.035 8.035 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1z"/>
+ </svg>
+ <small class="<?php if($task["overdue"]): ?> text-danger <?php else: ?> text-primary <?php endif; ?> fs-6 fw-light small"><?php echo \htmlentities($task["dueBy"], ENT_QUOTES, 'UTF-8', false); ?></small></span>
+ 
+ 
+ <br>
+ <span><?php echo \htmlentities($task["description"], ENT_QUOTES, 'UTF-8', false); ?></span>
+ <span style="float: right;"><span class="text-primary fs-6 fw-light"><?php echo \htmlentities($task["points"], ENT_QUOTES, 'UTF-8', false); ?></span> points</span>
+ <br>
+
+</div>
+
+<div class="modal fade text-dark" id="taskInfoModal" tabindex="-1" aria-hidden="true" data-task-id="<?php echo \htmlentities($task["id"], ENT_QUOTES, 'UTF-8', false); ?>">
+ <div class="modal-dialog modal-lg">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h2 class="modal-title" id="taskInfoTitle">Would you like to start this task?</h2>
+ <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+ </div>
+ <div class="modal-body d-flex flex-column">
+ <h3 class="display-6"><?php echo \htmlentities($task["name"], ENT_QUOTES, 'UTF-8', false); ?></h3>
+ <span class="text-secondary fw-bold">Description: <span class="fw-light"><?php echo \htmlentities($task["description"], ENT_QUOTES, 'UTF-8', false); ?></span></span>
+ <span class="text-secondary fw-bold">Due date: <span class="fw-light"><?php echo \htmlentities($task["dueBy"], ENT_QUOTES, 'UTF-8', false); ?></span></span>
+ <span class="text-secondary fw-bold"><span class="fw-light text-primary"><?php echo \htmlentities($task["points"], ENT_QUOTES, 'UTF-8', false); ?></span> Points</span>
+ </div>
+ <div class="modal-footer">
+ <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+ <button type="button" class="btn btn-primary" id="taskInfoStartTaskButton">Start Task</button>
+ </div>
+ </div>
+ </div>
+</div>
+
+
+<?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+
+<?php if(!count($tasks)): ?>
+
+<div class="px-3 py-2 m-2 rounded border">
+ <div class="fs-4 text-wrap" style="width: 20rem">You have no set tasks.</div>
+
+</div>
+<?php endif; ?>
+
+<?php $this->stopSection(); ?>
+
+<?php $this->startSection('messages'); ?>
+
+<?php $__currentLoopData = $feedback; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $fb_item): $loop = $this->incrementLoopIndices();  ?>
+
+<div class="px-3 py-2 m-2 rounded border text-muted item-box" data-feedback-id="<?php echo \htmlentities($fb_item["id"], ENT_QUOTES, 'UTF-8', false); ?>">
+ <span><span class="fs-4"><?php echo \htmlentities($fb_item["name"], ENT_QUOTES, 'UTF-8', false); ?></span> - <span class="fw-bold fs-6" style="text-decoration: none; cursor: pointer;"> <?php echo \htmlentities($fb_item["setBy"], ENT_QUOTES, 'UTF-8', false); ?> </span></span>
+ <span class="py-3 text-primary" style="float: right;">Awaiting Feedback</span>
+ <br>
+ <span><?php echo \htmlentities($fb_item["description"], ENT_QUOTES, 'UTF-8', false); ?></span>
+ <br>
+
+</div>
+
+
+<?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+
+<?php if(!count($feedback)): ?>
+
+<div class="px-3 py-2 m-2 rounded border">
+ <div class="fs-4 text-wrap" style="width: 20rem">You have no new feedback.</div>
+
+</div>
+<?php endif; ?>
+
+
+<?php $this->stopSection(); ?>
+
+
+<?php $this->startSection('leaderboard'); ?>
+
+<?php $__currentLoopData = $leaderboard->getLeaderboard(); $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $lb_item): $loop = $this->incrementLoopIndices();  ?>
+<div class="px-3 py-2 m-2 rounded border item-box" data-leaderboard-id="<?php echo \htmlentities($lb_item["id"], ENT_QUOTES, 'UTF-8', false); ?>">
+<span class="fs-6"><?php echo \htmlentities($lb_item["name"], ENT_QUOTES, 'UTF-8', false); ?></span>
+<span style="float: right;"><span class="text-primary fs-6 fw-light"><?php echo \htmlentities($lb_item["points"], ENT_QUOTES, 'UTF-8', false); ?></span> points</span>
+</div>
+
+<?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+
+<?php if(!count($leaderboard->getLeaderboard())): ?>
+
+<div class="px-3 py-2 m-2 rounded border">
+ <span class="fs-4">Your class leaderboard is empty!</span>
+</div>
+
+<?php endif; ?>
+
+<?php $this->stopSection(); ?>
+
+
+
+<?php $this->startSection('statustoast'); ?>
+<div class="position-fixed bottom-0 end-0 p-3 text-dark" style="z-index: 11">
+ <div id="status-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+ <div class="toast-header">
+ <strong class="me-auto">Status</strong>
+ <small>Now</small>
+ <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+ </div>
+ <div id="status-toast-content" class="toast-body">
+ Content
+ </div>
+ </div>
+</div>
+<?php $this->stopSection(); ?>

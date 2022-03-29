@@ -5,7 +5,7 @@
 
         <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300&display=swap" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="scripts/general.js"></script>
+        <script src="scripts/general_student.js"></script>
         <script src="scripts/login.js"></script>
         <!--Scripts are in the head so that page transitions are smooth-->
         <style>
@@ -16,6 +16,15 @@
                 font-family: 'Fredoka' !important;
                 height: 100vh;
                 background-attachment: fixed;
+            }
+            .login-box {
+                background: linear-gradient(
+                    rgba(152,14,210,0.1), 
+                    rgba(152,14,210,0.1)
+                );
+
+                backdrop-filter: blur(8px);
+
             }
 
         </style>

@@ -53,7 +53,13 @@
         <title>GibJohn Tutoring - @yield('title')</title>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="scripts/general.js"></script>
+
+        @if($user->isTeacher)
+            <script src="scripts/general_teacher.js"></script>
+        @else
+            <script src="scripts/general_student.js"></script>
+        @endif
+
  
 
         <!--Some scripts are in the head so that page transitions are smooth-->
@@ -118,9 +124,9 @@
                         <li class="nav-item">
                             <a class="nav-link px-3 lead @if($page=="dashboard") active @endif" data-redir-loc="/">Dashboard</a>
                         </li>
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <a class="nav-link px-3 lead @if($page=="tasks") active @endif"  data-redir-loc="tasks.php">Tasks</a>
-                        </li>
+                        </li>-->
                     </ul>
                     <div class="d-inline-flex flex-column">
 

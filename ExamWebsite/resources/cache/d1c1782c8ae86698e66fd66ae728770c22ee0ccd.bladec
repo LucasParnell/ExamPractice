@@ -53,7 +53,13 @@
  <title>GibJohn Tutoring - <?php echo $this->yieldContent('title'); ?></title>
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <script src="scripts/general.js"></script>
+
+ <?php if($user->isTeacher): ?>
+ <script src="scripts/general_teacher.js"></script>
+ <?php else: ?>
+ <script src="scripts/general_student.js"></script>
+ <?php endif; ?>
+
  
 
  <!--Some scripts are in the head so that page transitions are smooth-->
@@ -118,9 +124,9 @@
  <li class="nav-item">
  <a class="nav-link px-3 lead <?php if($page=="dashboard"): ?> active <?php endif; ?>" data-redir-loc="/">Dashboard</a>
  </li>
- <li class="nav-item">
+ <!--<li class="nav-item">
  <a class="nav-link px-3 lead <?php if($page=="tasks"): ?> active <?php endif; ?>"  data-redir-loc="tasks.php">Tasks</a>
- </li>
+ </li>-->
  </ul>
  <div class="d-inline-flex flex-column">
 

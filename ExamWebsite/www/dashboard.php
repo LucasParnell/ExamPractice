@@ -5,6 +5,7 @@
     include_once "../resources/models/tasks.php";
     include_once "../resources/models/feedback.php";
     include_once "../resources/models/leaderboard.php";
+    include_once "../resources/models/teachingGroups.php";
     if(array_key_exists("User", $_SESSION)){
 
         $user = unserialize($_SESSION["User"]);
@@ -21,7 +22,8 @@
                                                 "debug"=>$SITE_DEBUG_ENABLED));
         }
         else{
-            echo $blade->run("teacherdashboard", array("user"=>$user,"debug"=>$SITE_DEBUG_ENABLED));
+            $teachingGroups = new TeachingGroups($user);
+            echo $blade->run("teacherdashboard", array("user"=>$user,"teachingGroups"=>$teachingGroups, "debug"=>$SITE_DEBUG_ENABLED));
         }
     }
     else{

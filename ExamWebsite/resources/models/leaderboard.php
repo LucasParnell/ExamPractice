@@ -75,8 +75,9 @@ class Leaderboard {
         SELECT `StudentScore` FROM `Leaderboard` WHERE `StudentID` = $userId;
         SQL;
         $result = $db->query($sql);
-        if($result){
-            $score = $result->fetch_all()[0][0];
+        $score = $result->fetch_all();
+        if($score){
+            $score = $score[0][0];
             return $score;
         }else{
             return 0;

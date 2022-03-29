@@ -3,7 +3,7 @@
 
 @extends('layouts.personal')
 
-@include('modules.dashwidgets')
+@include('modules.studentdashwidgets')
 
  
 @section('title', 'Dashboard')

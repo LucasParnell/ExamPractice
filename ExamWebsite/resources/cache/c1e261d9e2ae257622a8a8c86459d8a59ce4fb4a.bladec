@@ -1,0 +1,24 @@
+
+ <div class="modal-dialog modal-lg">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h2 class="modal-title" id="teachingGroupTitle">Manage Students</h2>
+ <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+ </div>
+ <div class="modal-body d-flex flex-column">
+ <span class="display-6 text-center py-2">Student List</span>
+ <div class="list-group">
+ <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+ The current link item
+ </a>
+ <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+ <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+ <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+ <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>
+ </div>
+ </div>
+ <div class="modal-footer">
+ <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+ </div>
+ </div>
+ </div>

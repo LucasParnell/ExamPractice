@@ -10,7 +10,7 @@
 <!--Login Form-->
 <div class="d-flex flex-column mx-4">
 
-    <div class="container border rounded shadow-lg text-light mt-2" style="max-width: 30rem">
+    <div class="container border rounded shadow-lg text-light mt-2 login-box" style="max-width: 30rem">
         <h3 class="display-6 text-center mt-2" id="loginPageHeader">Sign Up</h3>
         <p class="lead text-center @if(count($status)&&$status[0]!="success") text-warning @endif" id="loginDesc">
 

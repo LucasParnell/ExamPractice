@@ -4,7 +4,7 @@
         <title>GibJohn Tutoring - @yield('title')</title>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="scripts/general.js"></script>
+        <script src="scripts/general_student.js"></script>
         <!--Scripts are in the head so that page transitions are smooth-->
         <style>
             body {

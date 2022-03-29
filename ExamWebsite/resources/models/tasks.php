@@ -78,7 +78,7 @@
             array_multisort($points, SORT_DESC, $tasks);
             //Sort tasks by date due
             $due = array_column($tasks, 'dueBy');
-            array_multisort($due, SORT_DESC, $tasks);
+            array_multisort($due, SORT_ASC, $tasks);
             
 
             return $tasks;
